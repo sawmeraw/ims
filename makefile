@@ -1,4 +1,4 @@
-BINARY_NAME=myapp
+BINARY_NAME=bin/myapp
 SRC_DIR=./cmd/server
 
 .PHONY: all
