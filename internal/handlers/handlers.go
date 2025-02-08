@@ -16,10 +16,8 @@ func New(services *services.Services) *Handler {
 }
 
 func (h *Handler) Home(c echo.Context) error {
-	data := map[string]interface{}{
-		"Title": "Sameer",
-	}
-	c.Render(200, "home", data)
+
+	// c.Render(200, "home")
 
 	return nil
 }

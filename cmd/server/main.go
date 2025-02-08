@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-
 	s, err := server.Init()
 	if err != nil {
 		log.Fatalf("Failed to initialize server: %v", err)

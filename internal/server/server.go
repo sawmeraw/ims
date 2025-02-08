@@ -1,8 +1,6 @@
 package server
 
 import (
-	"html/template"
-	"io"
 	"log"
 
 	"github.com/labstack/echo/v4"
@@ -13,14 +11,6 @@ import (
 	"github.com/sawmeraw/ims/internal/services"
 )
 
-type Templates struct {
-	t *template.Template
-}
-
-func (t *Templates) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	return t.t.ExecuteTemplate(w, name, data)
-}
-
 type Server struct {
 	cfg      *config.Config
 	db       *database.Database
@@ -28,7 +18,7 @@ type Server struct {
 	services *services.Services
 }
 
-// load the config, initialize the database connection, parse templates and start the echo server
+// load the config, initialize the database connection, init services and start the echo server
 func Init() (*Server, error) {
 	cfg, err := config.Load()
 
@@ -44,11 +34,6 @@ func Init() (*Server, error) {
 
 	e := echo.New()
 
-	t := &Templates{
-		t: template.Must(template.ParseGlob("internal/templates/**/*.html")),
-	}
-	e.Renderer = t
-
 	services := services.NewServices(db)
 
 	return &Server{
@@ -62,6 +47,7 @@ func Init() (*Server, error) {
 
 // returning a server pointer to chain calls, just to not confuse myself
 func (s *Server) SetupRoutes() *Server {
+	// s.echo.Static("static")
 	h := handlers.New(s.services)
 	s.echo.GET("/", h.Home)
 	return s
