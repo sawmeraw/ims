@@ -3,9 +3,9 @@ package models
 import "time"
 
 type Invoice struct {
-	ID          int
-	UserID      int
-	ClientID    int
+	ID          uint
+	UserID      uint
+	ClientID    uint
 	Client      Client
 	User        User
 	Items       []InvoiceItem
@@ -17,8 +17,8 @@ type Invoice struct {
 }
 
 type InvoiceItem struct {
-	ID          int
-	InvoiceID   int
+	ID          uint
+	InvoiceID   uint
 	Description string
 	Quantity    int
 	UnitPrice   float64

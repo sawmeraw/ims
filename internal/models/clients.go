@@ -3,8 +3,8 @@ package models
 import "time"
 
 type Client struct {
-	ID           int
-	UserID       int
+	ID           uint
+	UserID       uint
 	BusinessName string
 	Address      Address
 	ABN          string
